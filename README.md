@@ -38,3 +38,54 @@
 - idx_devices_status, idx_devices_hostname — ускоряют поиск и фильтрацию устройств по статусу и имени.
 - idx_metrics_device_time — важен для запросов по метрикам (фильтрация по устройству + сортировка по времени).
 - idx_incidents_device_status — ускоряет поиск инцидентов по устройству и статусу.
+
+## Установка и запуск проекта
+
+### Требования
+
+- Git
+- Docker 20.10+
+- Docker Compose 2.0+
+
+### Команды для запуска
+
+# 1. Клонировать репозиторий
+git clone https://github.com/arina983/nms_monitoring_db.git
+
+# 2. Перейти в папку проекта
+cd nms_monitoring_db
+
+# 3. Запустить контейнер
+docker compose up -d
+
+# 4. Проверить статус
+docker compose ps
+
+## Подключение к базе данных
+
+### Параметры подключения
+
+| Параметр | Значение |
+|----------|----------|
+| Хост | localhost |
+| Порт | 5434 |
+| Имя БД | network_monitoring |
+| Пользователь | nms_user |
+| Пароль | nms_password |
+
+### Способ 1: Через psql (из контейнера)
+
+```bash
+docker exec -it postgres_nms_db psql -U nms_user -d network_monitoring
+```
+
+### Способ 2: Через DBeaver
+
+1. Создать новое соединение → **PostgreSQL**
+2. Заполнить поля:
+   - **Host**: `localhost`
+   - **Port**: `5434`
+   - **Database**: `network_monitoring`
+   - **Username**: `nms_user`
+   - **Password**: `nms_password`
+3. Нажать **Test Connection** → **Finish**

@@ -1,0 +1,18 @@
+services:
+  postgres-nms:
+    build: .
+    container_name: postgres_nms_db
+    environment:
+      POSTGRES_DB: network_monitoring
+      POSTGRES_USER: nms_user
+      POSTGRES_PASSWORD: nms_password
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_nms_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./data.sql:/docker-entrypoint-initdb.d/02_data.sql
+    restart: unless-stopped
+
+volumes:
+  postgres_nms_data:
