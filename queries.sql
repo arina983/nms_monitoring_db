@@ -37,6 +37,35 @@ FROM devices d
 WHERE i.severity = 'critical'
 ORDER BY i.created_at DESC;
 
+-- Средний уровень сигнала по базовым станциям
+SELECT d.hostname,
+    AVG(d.signal_strength) AS avg_rssi,
+    MIN(d.signal_strength) AS min_rssi,
+    MAX(d.signal_strength) AS max_rssi
+FROM devices d
+WHERE d.device_type_id IN (
+        SELECT id
+        FROM device_types
+        WHERE name = 'eNodeB'
+    )
+GROUP BY d.hostname
+ORDER BY avg_rssi ASC;
+
+-- Средний уровень сигнала по локациям
+SELECT l.name AS location_name,
+    COUNT(d.id) AS enodeb_count,
+    ROUND(AVG(d.signal_strength), 2) AS avg_rssi,
+    MIN(d.signal_strength) AS worst_rssi
+FROM locations l
+    JOIN devices d ON l.id = d.location_id
+WHERE d.device_type_id = (
+        SELECT id
+        FROM device_types
+        WHERE name = 'eNodeB'
+    )
+GROUP BY l.name
+ORDER BY avg_rssi ASC;
+
 -- Устройства с информацией о производителе 
 SELECT d.hostname,
     d.ip_address,
