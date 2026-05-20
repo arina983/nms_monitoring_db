@@ -21,9 +21,7 @@ INSERT INTO vendors (name) VALUES
 ('ZTE'), ('Samsung'), ('Juniper'), ('MikroTik');
 
 -- Устройства 
-INSERT INTO devices 
-    (hostname, ip_address, location_id, device_type_id, vendor_id, 
-     network_type, technology, cell_id, pci, signal_strength, status) 
+INSERT INTO devices (hostname, ip_address, location_id, device_type_id, vendor_id, network_type, technology, cell_id, pci, signal_strength, status) 
 VALUES
 ('enodeb-nsk-01', '192.168.25.10', 1, 1, 1, 'lte', 'LTE', 'LTE-00001', 101, -68, 'active'),
 ('enodeb-nsk-02', '192.168.25.11', 1, 1, 2, 'lte', 'LTE', 'LTE-00002', 245, -72, 'active'),

@@ -38,6 +38,8 @@
 - idx_devices_status, idx_devices_hostname — ускоряют поиск и фильтрацию устройств по статусу и имени.
 - idx_metrics_device_time — важен для запросов по метрикам (фильтрация по устройству + сортировка по времени).
 - idx_incidents_device_status — ускоряет поиск инцидентов по устройству и статусу.
+- idx_devices_cell_id - Поиск по идентификатору соты(LTE)
+- idx_devices_pci - Поиск по PCI (LTE)
 
 ## Установка и запуск проекта
 
